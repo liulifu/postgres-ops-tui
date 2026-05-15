@@ -1,0 +1,25 @@
+{
+  "name": "postgres-ops-tui",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Hermes-style PostgreSQL operations TUI with a React/Ink frontend and Python gateway.",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsx src/entry.tsx",
+    "smoke": "tsx src/smoke.ts",
+    "type-check": "tsc --noEmit",
+    "test:py": "python -m unittest discover -s tests",
+    "test": "npm run type-check && npm run smoke && npm run test:py"
+  },
+  "dependencies": {
+    "ink": "^6.8.0",
+    "react": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
