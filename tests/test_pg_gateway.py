@@ -1,6 +1,6 @@
 import unittest
 
-from pg_ops_tui.pg_gateway import _int, _is_psql_meta_command, probe_menu
+from pg_ops_tui.pg_gateway import _int, _is_psql_meta_command, connection_profiles, probe_menu, script_choices
 
 
 class PgGatewayTest(unittest.TestCase):
@@ -18,6 +18,16 @@ class PgGatewayTest(unittest.TestCase):
 
     def test_int_falls_back_to_zero(self) -> None:
         self.assertEqual(_int(""), 0)
+
+    def test_connection_profiles_include_default_docker(self) -> None:
+        ids = {item["value"] for item in connection_profiles()}
+
+        self.assertIn("local-docker", ids)
+
+    def test_script_choices_include_sample_script(self) -> None:
+        scripts = {item["value"] for item in script_choices()}
+
+        self.assertIn("activity_top.sql", scripts)
 
 
 if __name__ == "__main__":

@@ -53,6 +53,17 @@ export type QueryResult = {
   output: string;
 };
 
+export type ChoiceInfo = {
+  value: string;
+  label: string;
+  description: string;
+  active?: boolean;
+};
+
+export type ConnectionInfo = ChoiceInfo;
+
+export type ScriptInfo = ChoiceInfo;
+
 type Pending = {
   reject: (error: Error) => void;
   resolve: (value: unknown) => void;
@@ -91,6 +102,22 @@ export class GatewayClient {
     return this.call<Snapshot>('snapshot', {});
   }
 
+  connectionProfiles(): Promise<ConnectionInfo[]> {
+    return this.call<ConnectionInfo[]>('connection_profiles', {});
+  }
+
+  setConnection(connectionId: string): Promise<ConnectionInfo> {
+    return this.call<ConnectionInfo>('set_connection', {connection_id: connectionId});
+  }
+
+  scriptChoices(): Promise<ScriptInfo[]> {
+    return this.call<ScriptInfo[]>('script_choices', {});
+  }
+
+  runScript(scriptId: string): Promise<QueryResult> {
+    return this.call<QueryResult>('run_script', {script_id: scriptId});
+  }
+
   checkpoint(): Promise<{message: string}> {
     return this.call<{message: string}>('checkpoint', {});
   }
@@ -99,12 +126,20 @@ export class GatewayClient {
     return this.call<ProbeInfo[]>('probe_menu', {});
   }
 
+  roleChoices(kind: 'roles' | 'login_roles'): Promise<ChoiceInfo[]> {
+    return this.call<ChoiceInfo[]>('role_choices', {kind});
+  }
+
   runProbe(key: string): Promise<QueryResult> {
     return this.call<QueryResult>('run_probe', {key});
   }
 
   runSql(sql: string): Promise<QueryResult> {
     return this.call<QueryResult>('run_sql', {sql});
+  }
+
+  resourceHealth(): Promise<QueryResult> {
+    return this.call<QueryResult>('resource_health', {});
   }
 
   close(): void {

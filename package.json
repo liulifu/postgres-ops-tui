@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": false,
   "type": "module",
-  "description": "Hermes-style PostgreSQL operations TUI with a React/Ink frontend and Python gateway.",
+  "description": "A retro PostgreSQL operations TUI with a React/Ink frontend and Python gateway.",
   "license": "MIT",
   "scripts": {
     "start": "tsx src/entry.tsx",

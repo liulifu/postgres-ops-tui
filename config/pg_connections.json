@@ -1,0 +1,25 @@
+{
+  "default": "local-docker",
+  "scripts_dir": "sql_scripts",
+  "connections": [
+    {
+      "id": "local-docker",
+      "label": "Local Docker PG",
+      "mode": "docker",
+      "container": "tui-linux-admin",
+      "database": "postgres",
+      "user": "postgres"
+    },
+    {
+      "id": "remote-example",
+      "label": "Remote PG example",
+      "mode": "postgres",
+      "host": "127.0.0.1",
+      "port": 5432,
+      "database": "postgres",
+      "user": "postgres",
+      "password_env": "PG_TUI_REMOTE_PASSWORD",
+      "sslmode": "prefer"
+    }
+  ]
+}
